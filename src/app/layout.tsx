@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import AuthGuard from "@/components/AuthGuard";
 import { usePathname } from "next/navigation";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-BR">
       <body className={`${inter.className} flex flex-col max-h-screen`}>
-        <header className="bg-gray-800 text-white p-4">
-          <div className="mx-auto">
-            <h1 className="text-2xl font-bold">Lopes Despachante</h1>
-          </div>
-        </header>
+        <Navbar />
 
         {!isAuthPage ? (
           <AuthGuard>
@@ -44,12 +41,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
 
         <footer className="bg-gray-800 text-white p-2">
-          <div className="mx-auto text-right">
-            <p className="text-sm">
-              &copy; {new Date().getFullYear()} Lopes Despachante. Todos os
-              direitos reservados.
-            </p>
-          </div>
+          <p className="text-sm text-right">
+            &copy; {new Date().getFullYear()} Lopes Despachante. Todos os
+            direitos reservados.
+          </p>
         </footer>
       </body>
     </html>
