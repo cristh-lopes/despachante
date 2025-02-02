@@ -26,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="flex h-screen overflow-hidden">
               <Sidebar currentPath={pathname} />
               <main className="flex-1 p-6 bg-gray-100">
-                <div className="h-full flex justify-center items-center bg-white rounded-md shadow-sm p-8 overflow-y-auto">
+                <div className="h-full flex bg-white rounded-md shadow-sm p-8 overflow-y-auto">
                   {children}
                 </div>
               </main>
