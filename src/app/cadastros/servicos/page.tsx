@@ -1,9 +1,9 @@
-import Button from "@/components/Button";
-import Table from "@/components/Table";
-import { FaPlusCircle } from "react-icons/fa";
+"use client";
 import { Service } from "@/models/Service";
 import { ServiceType } from "@/models/ServiceType";
 import { Column } from "@/models/Column";
+import type { FormField } from "@/models/FormField";
+import { DefaultCrud } from "@/components/DefaultCrud";
 
 const serviceTypes: ServiceType[] = [
   {
@@ -16,6 +16,17 @@ const serviceTypes: ServiceType[] = [
     name: "Segunda Via de Recibo",
     requiredExpenses: ["Taxa Impressão"],
   },
+];
+
+const fields: FormField<Service, keyof Service>[] = [
+  { label: "Nome do Serviço", key: "name", type: "text" },
+  {
+    label: "Tipo",
+    key: "type",
+    type: "select",
+    options: serviceTypes.map((type) => ({ label: type.name, id: type.id })),
+  },
+  { label: "Valor Padrão", key: "defaultPrice", type: "number" },
 ];
 
 const columns: Column<Service, keyof Service>[] = [
@@ -56,18 +67,15 @@ const data: Service[] = [
     name: "Segunda Via de Recibo",
     type: serviceTypes[1],
     defaultPrice: 300,
-    expenses: [{ id: "e3", name: "Taxa Impressão", value: 100}],
+    expenses: [{ id: "e3", name: "Taxa Impressão", value: 100 }],
   },
 ];
 
 export default function Servicos() {
+  function onSubmit(service: Service) {
+    console.log(service);
+  }
   return (
-    <div className="w-full">
-      <div className="flex flex-row justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Serviços</h1>
-        <Button Icon={FaPlusCircle}>Novo Serviço</Button>
-      </div>
-      <Table columns={columns} data={data} whoIsKey="id" />
-    </div>
+    <DefaultCrud tableProps={{ columns, data, whoIsKey: "id" }} formProps={{ fields, onSubmit }} />
   );
 }

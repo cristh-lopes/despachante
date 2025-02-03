@@ -1,7 +1,7 @@
 import React from "react";
 import { Column } from "@/models/Column";
 
-interface TableProps<T> {
+export interface TableProps<T> {
   columns: Column<T, keyof T>[];
   data: T[];
   whoIsKey: keyof T;
